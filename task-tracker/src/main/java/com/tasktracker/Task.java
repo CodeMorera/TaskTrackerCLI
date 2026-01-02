@@ -1,5 +1,6 @@
 package com.tasktracker;
 
+import java.time.Instant;
 import java.util.Date;
 
 public class Task {
@@ -7,8 +8,8 @@ public class Task {
     private int id;
     private String description;
     private String status;
-    private Date createdAt;
-    private Date updatedAt;
+    private final Instant createdAt;
+    private Instant updatedAt;
 
     public Task(int id,
             String description,
@@ -18,8 +19,8 @@ public class Task {
         this.id = id;
         this.description = description;
         this.status = status;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.createdAt = Instant.now();
+        this.updatedAt = this.createdAt;
     }
 
     public int getId() {
@@ -46,20 +47,18 @@ public class Task {
         this.status = status;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Instant getCreatedAt() {
+        return this.createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void makeUpdated(){
+        this.updatedAt = Instant.now();
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public Instant getUpdated(){
+        return this.updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+    
 
 }
