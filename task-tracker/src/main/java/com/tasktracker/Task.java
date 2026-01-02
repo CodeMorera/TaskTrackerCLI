@@ -13,9 +13,8 @@ public class Task {
 
     public Task(int id,
             String description,
-            String status,
-            Date createdAt,
-            Date updatedAt) {
+            String status
+            ) {
         this.id = id;
         this.description = description;
         this.status = status;
@@ -23,13 +22,21 @@ public class Task {
         this.updatedAt = this.createdAt;
     }
 
+    public Task(int id,
+            String description,
+            String status,
+            Instant createdAt,
+            Instant updatedAt) {
+        this.id = id;
+        this.description = description;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public int getId() {
         return id;
     }
-
-    // public void setId(int id) {
-    // this.id = id;
-    // }
 
     public String getDescription() {
         return description;

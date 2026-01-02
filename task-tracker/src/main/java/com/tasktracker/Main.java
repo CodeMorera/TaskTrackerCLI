@@ -9,6 +9,7 @@ import org.json.JSONObject;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         // String[] statuses = {"", "todo", "in-progress", "done"};
+        int nextId =0;
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("*************************************");
@@ -25,7 +26,7 @@ public class Main {
             System.out.println("D. List Tasks");
             System.out.println("E. Exit");
             String option = scanner.next();
-            Thread.sleep(0500);
+            Thread.sleep(500);
 
             switch(option.toUpperCase()){
                 case "A":
@@ -60,14 +61,14 @@ public class Main {
         scanner.nextLine();
         System.out.println("Add description: ");
         String desc = scanner.nextLine();
-        Thread.sleep(0500);
+        Thread.sleep(500);
         String description = String.format("Task %s added successfully!", desc);
         System.out.println(description);
 
         boolean progress = true;
         while (progress) {
             String[] statuses = {"", "To Do", "In Progress", "Done"};
-            Thread.sleep(0500);
+            Thread.sleep(500);
             System.out.println("Add status: ");
             System.out.println("1 for 'To Do'");
             System.out.println("2 for 'In Progress'");
@@ -76,7 +77,7 @@ public class Main {
             if (stat == 1 || stat == 2 || stat == 3) {
                 progress = false;
                 String status = statuses[stat];
-                Thread.sleep(0500);
+                Thread.sleep(500);
                 String successStatus = String.format("Status is: %s!", status);
                 System.out.println(successStatus);
                 
@@ -86,8 +87,8 @@ public class Main {
             
         }
     }
-    public static void jsonWriter(int id, String task, String description) {
+    public static void jsonWriter(int id, String description, String status) {
     
-        Task task = new Task(1,task,description, Task.createdAt, Task.updatedAt);
+        Task task = new Task(1,description, status);
     }  
 }
