@@ -1,7 +1,4 @@
-package com.tasktracker;
-
 import java.time.Instant;
-import java.util.Date;
 
 public class Task {
 
@@ -69,3 +66,5 @@ public class Task {
     
 
 }
+
+
