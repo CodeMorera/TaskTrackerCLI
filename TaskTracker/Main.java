@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.Arrays;
+import java.util.Calendar;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,7 +15,15 @@ public class Main {
         if(args.length > 0){
             switch (args[0]) {
                 case "add":
-                    String JString = jsonString(args[1]);
+                    String[] subArray = Arrays.copyOfRange(args,1,args.length);
+                    String JArgs = String.join(" ", subArray);
+
+                    Calendar cal = Calendar.getInstance();
+                    String calString = String.format("%1$tm/%1$td/%1$tY", cal);
+                    // String calString = calFormat.toString();
+
+
+                    String JString = jsonString(JArgs, calString);
                     insertToJsonFile(filename, JString, null);      
                     System.out.println("Task added successfully ");
                     break;
@@ -57,22 +67,15 @@ public class Main {
             e.printStackTrace();
         }
     }
-    public static String jsonString(String description){
+    public static String jsonString(String description, String cal){
         String jsonTemplate = "{\n" +
                                          "  \"id\": \"id_filler\",\n" +
                                          "  \"description\": \"%s\",\n" +
                                          "  \"status\": \"status_filler\",\n" +
-                                         "  \"createdAt\": \"CreatedAt\",\n" +
-                                         "  \"updatedAt\": \"updatedAt\",\n}";
-        String jsonDescString = String.format(jsonTemplate, description);
+                                         "  \"createdAt\": \"%s\",\n" +
+                                         "  \"updatedAt\": \"%s\"\n},";
+        String jsonDescString = String.format(jsonTemplate, description, cal, cal);
         return jsonDescString;
-        // try (FileWriter fileWriter = new FileWriter("task.json")) {
-        //     fileWriter.write(jsonDescString);
-        //     System.out.println("Successfully wrote JSON data to " + "task.json");
-        // } catch (IOException e) {
-        //     System.err.println("An error occurred while writing to the file: " + e.getMessage());
-        //     e.printStackTrace();
-        // }
     }
     public static void insertToJsonFile(String filePath, String jsonString, String arrayKey) {
         StringBuilder fileContent = new StringBuilder();
